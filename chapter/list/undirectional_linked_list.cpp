@@ -12,3 +12,7 @@ void EstByHead(T* datas) noexcept
 {
 
 }
+
+
+int main()
+{}
