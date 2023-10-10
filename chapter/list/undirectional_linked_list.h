@@ -58,7 +58,7 @@ public:
 
     auto PushFront(T t) noexcept -> bool
     {
-        Node<T> p = new Node<T>();
+        auto p = new Node<T>();
         if (p == nullptr) {
             return false;
         }
@@ -121,10 +121,10 @@ public:
                 p->next = q->next;
                 delete q;
                 q = nullptr;
+                size_--;
+                return true;
             }
             p = p->next;
-            size_--;
-            return true;
         }
         return false;
     }
