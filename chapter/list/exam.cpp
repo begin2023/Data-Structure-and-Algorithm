@@ -31,4 +31,10 @@ int main()
     std::vector<int> v = {1, 5, 2, 3, 4};
     List::TailList<int> t1(v);
     t1.ToString();
+    std::cout << t1.Size() << std::endl;
+    
+    List::TailList<int> t2();
+    t2.ToString();
+    std::cout << t2.Size() << std::endl;
+
 }
