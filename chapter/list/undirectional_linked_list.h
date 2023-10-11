@@ -4,22 +4,22 @@
 #define UNDIRECTIONAL_LINKED_LIST_H
 
 #include <cstddef>
+#include <iostream>
 #include <string>
 #include <type_traits>
-#include <iostream>
 #include <typeinfo>
 #include <vector>
 
 namespace List {
-template <typename T>
-struct Node {
-    T data;
-    Node *next;
+template<typename T> struct Node
+{
+    T     data;
+    Node* next;
 };
 
 // 尾插法
-template <typename T>
-class TailList {
+template<typename T> class TailList
+{
 public:
     TailList() noexcept
     {
@@ -38,11 +38,12 @@ public:
         }
     }
 
-    TailList(std::vector<T> &t) noexcept : TailList()
+    TailList(std::vector<T>& t) noexcept
+        : TailList()
     {
         auto p = headNode_;
         for (auto val : t) {
-            Node<T> *newNode = new Node<T>();
+            Node<T>* newNode = new Node<T>();
             newNode->data = val;
             newNode->next = nullptr;
             p->next = newNode;
@@ -51,15 +52,9 @@ public:
         }
     }
 
-    auto Size() const noexcept -> size_t
-    {
-        return size_;
-    }
+    auto Size() const noexcept -> size_t { return size_; }
 
-    auto Empty() const noexcept -> bool
-    {
-        return (size_ == 0U);
-    }
+    auto Empty() const noexcept -> bool { return (size_ == 0U); }
 
     auto PushFront(T t) noexcept -> bool
     {
@@ -80,7 +75,7 @@ public:
         while (p->next != nullptr) {
             p = p->next;
         }
-        Node<T> *q = new Node<T>();
+        Node<T>* q = new Node<T>();
         if (p == nullptr) {
             return false;
         }
@@ -103,7 +98,7 @@ public:
             p = p->next;
             pos--;
         }
-        Node<T> *q = new Node<T>();
+        Node<T>* q = new Node<T>();
         if (p == nullptr) {
             return false;
         }
@@ -199,8 +194,8 @@ public:
     }
 
 private:
-    Node<T> *headNode_;
-    size_t size_;
+    Node<T>* headNode_;
+    size_t   size_;
 };
-}  // namespace List
+}   // namespace List
 #endif
