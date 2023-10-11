@@ -11,22 +11,22 @@
 #include <vector>
 
 namespace List {
-template<typename T> struct Node
+template<typename T>
+struct Node
 {
-    T     data;
+    T data;
     Node* next;
 };
 
 // 尾插法
-template<typename T> class TailList
+template<typename T>
+class TailList
 {
 public:
     TailList() noexcept
-    {
-        headNode_ = new Node<T>();
-        headNode_->next = nullptr;
-        size_ = 0;
-    }
+        : headNode_(new Node<T>())
+        , size_(0)
+    {}
 
     ~TailList() noexcept
     {
@@ -52,9 +52,15 @@ public:
         }
     }
 
-    auto Size() const noexcept -> size_t { return size_; }
+    auto Size() const noexcept -> size_t
+    {
+        return size_;
+    }
 
-    auto Empty() const noexcept -> bool { return (size_ == 0U); }
+    auto Empty() const noexcept -> bool
+    {
+        return (size_ == 0U);
+    }
 
     auto PushFront(T t) noexcept -> bool
     {
@@ -195,7 +201,7 @@ public:
 
 private:
     Node<T>* headNode_;
-    size_t   size_;
+    size_t size_;
 };
 }   // namespace List
 #endif

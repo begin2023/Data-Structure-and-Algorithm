@@ -13,7 +13,7 @@ AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
  
 # 连续声明时，对齐所有声明的变量名
-AlignConsecutiveDeclarations: true
+AlignConsecutiveDeclarations: false
  
 # 对齐连续位域字段的风格
 # AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
@@ -40,7 +40,6 @@ AllowAllConstructorInitializersOnNextLine: true
 # 允许函数声明的所有参数在放在下一行
 AllowAllParametersOfDeclarationOnNextLine: true
  
- 
 # 允许短的块放在同一行(Always 总是将短块合并成一行，Empty 只合并空块)
 AllowShortBlocksOnASingleLine: Empty
  
@@ -48,7 +47,7 @@ AllowShortBlocksOnASingleLine: Empty
 AllowShortCaseLabelsOnASingleLine: true
  
 # 允许短的函数放在同一行: None, InlineOnly(定义在类中), Empty(空函数), Inline(定义在类中，空函数), All
-AllowShortFunctionsOnASingleLine: Inline
+AllowShortFunctionsOnASingleLine: None
  
 # 允许短的if语句保持在同一行
 AllowShortIfStatementsOnASingleLine: true
@@ -69,7 +68,7 @@ AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: false
  
 # 总是在template声明后换行
-AlwaysBreakTemplateDeclarations: false
+AlwaysBreakTemplateDeclarations: true
  
 # false表示函数实参要么都在同一行，要么都各自一行
 BinPackArguments: false
