@@ -82,7 +82,7 @@ public:
             p = p->next;
         }
         Node<T>* q = new Node<T>();
-        if (p == nullptr) {
+        if (q == nullptr) {
             return false;
         }
 

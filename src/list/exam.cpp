@@ -33,7 +33,7 @@ int main()
     t1.ToString();
     std::cout << t1.Size() << std::endl;
     
-    List::TailList<int> t2();
+    List::TailList<int> t2;
     t2.ToString();
     std::cout << t2.Size() << std::endl;
 
