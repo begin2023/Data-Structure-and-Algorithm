@@ -4,6 +4,11 @@
 #define UNDIRECTIONAL_LINKED_LIST_H
 
 #include <cstddef>
+#include <string>
+#include <type_traits>
+#include <iostream>
+#include <typeinfo>
+#include <vector>
 
 namespace List {
 template <typename T>
@@ -33,7 +38,7 @@ public:
         }
     }
 
-    TailList(const T t[]) noexcept : TailList()
+    TailList(std::vector<T> &t) noexcept : TailList()
     {
         auto p = headNode_;
         for (auto val : t) {
@@ -132,7 +137,7 @@ public:
     auto PopFront() noexcept -> T
     {
         if (Empty()) {
-            return NULL;
+            return T();
         }
         auto p = headNode_->next;
         auto res = p->data;
@@ -146,7 +151,7 @@ public:
     auto PopBack() noexcept -> T
     {
         if (Empty()) {
-            return NULL;
+            return T();
         }
 
         auto p = headNode_;
@@ -165,7 +170,7 @@ public:
     auto GetNodeByPos(size_t pos) noexcept -> T
     {
         if (pos >= size_) {
-            return NULL;
+            return T();
         }
         auto p = headNode_->next;
         while (pos > 0) {
@@ -173,6 +178,24 @@ public:
             pos--;
         }
         return p->data;
+    }
+
+    void ToString() noexcept
+    {
+        if (!(std::is_arithmetic_v<T> || std::is_same_v<T, std::string>)) {
+            std::cerr << "Type " << typeid(T).name() << " can not print!" << std::endl;
+            return;
+        }
+        if (Empty()) {
+            std::cerr << "Empty list!" << std::endl;
+            return;
+        }
+        auto p = headNode_->next;
+        while (p->next != nullptr) {
+            std::cout << std::to_string(p->data) << " ";
+            p = p->next;
+        }
+        std::cout << std::to_string(p->data) << std::endl;
     }
 
 private:

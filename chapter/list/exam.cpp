@@ -1,4 +1,4 @@
-#include <vector>
+
 #include "undirectional_linked_list.h"
 
 
@@ -28,7 +28,7 @@
 int main()
 {
     // 单项链表反转
-    std::vector<int> v = {1, 2, 3, 4};
-    List::TailList<int> tl(v);
-
+    std::vector<int> v = {1, 5, 2, 3, 4};
+    List::TailList<int> t1(v);
+    t1.ToString();
 }
