@@ -1,0 +1,169 @@
+#ifndef UNDIRECTIONAL_LINKED_LIST_H
+#define UNDIRECTIONAL_LINKED_LIST_H
+
+#include <cstddef>
+#include <iostream>
+#include <memory>
+#include <string>
+#include <type_traits>
+#include <typeinfo>
+#include <vector>
+
+namespace List {
+
+template<typename T>
+struct Node {
+    T data;
+    std::unique_ptr<Node<T>> next;
+
+    Node(const T& v) : data(v), next(nullptr) {}
+};
+
+template<typename T>
+class TailList {
+public:
+    TailList() noexcept : headNode_(std::make_unique<Node<T>>(T())), size_(0) {}
+
+    ~TailList() noexcept = default;
+
+    TailList(const std::vector<T>& t) noexcept : TailList() {
+        auto p = headNode_.get();
+        for (const auto& val : t) {
+            p->next = std::make_unique<Node<T>>(val);
+            p = p->next.get();
+            size_++;
+        }
+    }
+
+    auto Size() const noexcept -> size_t {
+        return size_;
+    }
+
+    auto Empty() const noexcept -> bool {
+        return (size_ == 0U);
+    }
+
+    auto PushFront(const T& t) noexcept -> bool {
+        auto p = std::make_unique<Node<T>>(t);
+        if (!p) {
+            return false;
+        }
+        p->next = std::move(headNode_->next);
+        headNode_->next = std::move(p);
+        size_++;
+        return true;
+    }
+
+    auto PushBack(const T& t) noexcept -> bool {
+        auto p = headNode_.get();
+        while (p->next) {
+            p = p->next.get();
+        }
+        p->next = std::make_unique<Node<T>>(t);
+        if (!p->next) {
+            return false;
+        }
+        size_++;
+        return true;
+    }
+
+    auto Insert(const T& t, size_t pos) noexcept -> bool {
+        if (pos >= size_) {
+            return false;
+        }
+
+        auto p = headNode_.get();
+        while (pos > 0) {
+            p = p->next.get();
+            pos--;
+        }
+        auto q = std::make_unique<Node<T>>(t);
+        if (!q) {
+            return false;
+        }
+        q->next = std::move(p->next);
+        p->next = std::move(q);
+        size_++;
+        return true;
+    }
+
+    auto Remove(const T& t) noexcept -> bool {
+        if (Empty()) {
+            return false;
+        }
+        auto p = headNode_.get();
+        while (p->next) {
+            if (p->next->data == t) {
+                p->next = std::move(p->next->next);
+                size_--;
+                return true;
+            }
+            p = p->next.get();
+        }
+        return false;
+    }
+
+    auto PopFront() noexcept -> T {
+        if (Empty()) {
+            return T();
+        }
+        auto p = std::move(headNode_->next);
+        auto res = p->data;
+        headNode_->next = std::move(p->next);
+        size_--;
+        return res;
+    }
+
+    auto PopBack() noexcept -> T {
+        if (Empty()) {
+            return T();
+        }
+
+        auto p = headNode_.get();
+        while (p->next->next) {
+            p = p->next.get();
+        }
+        auto q = std::move(p->next);
+        auto res = q->data;
+        p->next = nullptr;
+        size_--;
+        return res;
+    }
+
+    auto GetNodeByPos(size_t pos) noexcept -> T {
+        if (pos >= size_) {
+            return T();
+        }
+        auto p = headNode_->next.get();
+        while (pos > 0) {
+            p = p->next.get();
+            pos--;
+        }
+        return p->data;
+    }
+
+    void Print() const noexcept {
+        if (!(std::is_arithmetic_v<T> || std::is_same_v<T, std::string>)) {
+            std::cerr << "Type " << typeid(T).name() << " cannot be printed!" << std::endl;
+            return;
+        }
+        if (Empty()) {
+            std::cerr << "Empty list!" << std::endl;
+            return;
+        }
+        auto p = headNode_->next.get();
+        while (p) {
+            std::cout << std::to_string(p->data) << " ";
+            p = p->next.get();
+        }
+        std::cout << std::endl;
+    }
+
+private:
+    std::unique_ptr<Node<T>> headNode_;
+    size_t size_;
+};
+
+}   // namespace List
+
+#endif
