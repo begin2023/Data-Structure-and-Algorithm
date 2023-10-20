@@ -1,12 +1,17 @@
-# 添加可执行文件
-add_executable(data-struct-algorithm test_main.cpp)
+# 设置 gtest 框架库的路径
+set(GTEST_ROOT /usr/src/gtest)
 
-# 添加依赖
-add_dependencies(data-struct-algorithm gtest)
+# 查找 gtest 框架库并链接
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+link_libraries(${GTEST_LIBRARIES} pthread)
 
-# 链接gtest库
-target_include_directories(data-struct-algorithm PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/gtest-install/include)
-target_link_libraries(data-struct-algorithm PRIVATE gtest gtest_main)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} cases)
 
-# 添加测试
-add_test(NAME data-struct-algorithm COMMAND data-struct-algorithm)
+add_executable(test_exe ${cases})
+
+include_directories(${CMAKE_SOURCE_DIR}/src)
+
+set_target_properties(test_exe PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/output)
+
+link_libraries(test_exe gtest)
