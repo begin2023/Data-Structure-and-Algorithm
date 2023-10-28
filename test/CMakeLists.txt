@@ -15,3 +15,5 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 set_target_properties(test_exe PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/output)
 
 link_libraries(test_exe gtest)
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
