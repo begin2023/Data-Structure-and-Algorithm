@@ -1,6 +1,1 @@
-#!/bin/bash
-
-sudo rm -rf build
-mkdir build
-cmake -B build
-cmake --build build
+sudo rm -rf build && mkdir build && cmake -B build && cmake --build build
