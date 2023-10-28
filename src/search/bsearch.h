@@ -11,7 +11,7 @@ int Bsearch(T data[], size_t len, T target)
 
     size_t head = 0;
     size_t tail = len - 1;
-    while (head < tail) {
+    while (head <= tail) {
         size_t pos = (head + tail) / 2;
         if (data[pos] == target) {
             return pos;
