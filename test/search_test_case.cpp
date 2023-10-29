@@ -3,12 +3,21 @@
 #include "gtest/gtest.h"
 
 namespace Test {
-TEST(search, binary)
+TEST(search, bsearch)
 {
     int arr[6] = {-1, 1, 2, 4, 7, 8};
     EXPECT_EQ(Search::Bsearch(arr, 0, 8), -1);
     EXPECT_EQ(Search::Bsearch(arr, 4, 8), -1);
     EXPECT_EQ(Search::Bsearch(arr, 6, 8), 5);
     EXPECT_EQ(Search::Bsearch(arr, 6, 4), 3);
+}
+
+TEST(search, bsearchByRecur)
+{
+    int arr[6] = {-1, 1, 2, 4, 7, 8};
+    EXPECT_EQ(Search::BsearchByRecur(arr, 0, 8), -1);
+    EXPECT_EQ(Search::BsearchByRecur(arr, 4, 8), -1);
+    EXPECT_EQ(Search::BsearchByRecur(arr, 6, 8), 5);
+    EXPECT_EQ(Search::BsearchByRecur(arr, 6, 4), 3);
 }
 }   // namespace Test
