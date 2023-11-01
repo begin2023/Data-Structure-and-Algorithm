@@ -1,6 +1,5 @@
 #include <cstddef>
 
-
 namespace Search {
 template <typename T = int>
 auto Bsearch(T data[], size_t len, T target) noexcept -> int
